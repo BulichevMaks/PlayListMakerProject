@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_main_activity" translatable="false">22sp</dimen>
+    <dimen name="text_size_settings_activity" translatable="false">16sp</dimen>
+    <dimen name="letter_spacing" translatable="false">0</dimen>
+    <dimen name="layout_height" translatable="false">56dp</dimen>
+    <dimen name="track_poster_size" translatable="false">45dp</dimen>
+    <dimen name="track_layout_height" translatable="false">61dp</dimen>
+    <dimen name="track_icon_radius" translatable="false">2dp</dimen>
+    <dimen name="padding_start_end" translatable="false">16dp</dimen>
+    <dimen name="padding_top_bottom" translatable="false">8dp</dimen>
+</resources>
