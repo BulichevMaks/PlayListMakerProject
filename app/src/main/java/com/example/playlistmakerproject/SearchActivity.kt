@@ -143,7 +143,7 @@ class SearchActivity : AppCompatActivity() {
 
 
         trackAdapter.setOnItemClickListener { position ->
-
+            startIntent(position, tracks)
             val items = historyTracks
 
             if (!items.contains(tracks[position])) {
@@ -159,7 +159,9 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-
+        historyAdapter.setOnItemClickListener {position ->
+            startIntent(position, historyTracks)
+        }
 
         val searchTextWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -180,7 +182,22 @@ class SearchActivity : AppCompatActivity() {
 
 
     }
-
+    private fun startIntent(position: Int, tracks: ArrayList<Track>) {
+        val selectedItem = tracks[position]
+        val intent = Intent(this, PlayerViewActivity::class.java)
+        intent.putExtra(SEL_ITEM, selectedItem.artworkUrl100)
+        intent.putExtra("trackName", selectedItem.trackName)
+        intent.putExtra("artistName",selectedItem.artistName)
+        intent.putExtra("duration",selectedItem.trackTimeMillis?.let {
+            SimpleDateFormat("mm:ss", Locale.getDefault()).format(it.toLong())
+        }.toString()
+        )
+        intent.putExtra("collectionName",selectedItem.collectionName)
+        intent.putExtra("releaseDate",selectedItem.releaseDate)
+        intent.putExtra("primaryGenreName",selectedItem.primaryGenreName)
+        intent.putExtra("country",selectedItem.country)
+        startActivity(intent)
+    }
 
 
     override fun onStop() {
@@ -341,6 +358,5 @@ class SearchActivity : AppCompatActivity() {
     private fun readFromPref(sharedPreferences: SharedPreferences): ArrayList<Track>? {
         val json = sharedPreferences.getString(LIST_KEY, null) ?: return arrayListOf()
         return Gson().fromJson(json, Array<Track>::class.java)?.let { ArrayList(it.toList()) }
-
     }
 }
