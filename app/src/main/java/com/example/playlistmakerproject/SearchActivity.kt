@@ -341,5 +341,6 @@ class SearchActivity : AppCompatActivity() {
     private fun readFromPref(sharedPreferences: SharedPreferences): ArrayList<Track>? {
         val json = sharedPreferences.getString(LIST_KEY, null) ?: return arrayListOf()
         return Gson().fromJson(json, Array<Track>::class.java)?.let { ArrayList(it.toList()) }
+
     }
 }
